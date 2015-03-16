@@ -102,6 +102,11 @@ class CronService
     protected function addJobs()
     {
         foreach ($this->configuration->getJobs() as $jobArray) {
+
+            //only run crons for the current application environment
+            if(in_array(getenv('APPLICATION_ENV'),$jobArray['envs']) === false)
+                continue;
+
             $job = new ShellJob();
             $job->setCommand($this->assembleShellJobString($jobArray['command']));
             $job->setSchedule(new CrontabSchedule($jobArray['schedule']));
@@ -112,7 +117,7 @@ class CronService
 
     protected function assembleShellJobString($command)
     {
-        return $this->configuration->getPhpPath() . ' ' . $this->configuration->getScriptPath() . $command;
+        return 'APPLICATION_ENV='.getenv('APPLICATION_ENV').' '.$this->configuration->getPhpPath() . ' ' . $this->configuration->getScriptPath() . $command;
     }
 
     protected function wait()

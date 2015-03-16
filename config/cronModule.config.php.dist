@@ -1,11 +1,11 @@
 <?php
 return [
     'phpPath' => 'php',
-    'scriptPath' => '/var/www/application/public/',
     'jobs' => [
         [
             'command' => 'index.php application cron mail',
-            'schedule' => '*/5 * * * *'
+            'schedule' => '*/5 * * * *',
+            'envs' => ['live','dev']
         ]
     ],
 
