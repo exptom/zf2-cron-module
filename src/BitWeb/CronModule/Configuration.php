@@ -108,7 +108,7 @@ class Configuration extends AbstractConfiguration
      */
     public function setScriptPath($scriptPath = null)
     {
-        $this->scriptPath = $scriptPath;
+       // $this->scriptPath = $scriptPath;
 
         return $this;
     }
@@ -118,7 +118,8 @@ class Configuration extends AbstractConfiguration
      */
     public function getScriptPath()
     {
-        return $this->scriptPath;
+       // return $this->scriptPath;
+        return getcwd().'/public/';
     }
 
     /**
